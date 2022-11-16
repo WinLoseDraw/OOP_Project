@@ -1,8 +1,17 @@
 public class User {
-    private String emailId;
-    private String password;
+    private final String emailId;
+    private final String password;
 
-    public boolean login() {
-        return true;
+    public User(String emailId, String password) {
+        this.emailId = emailId;
+        this.password = password;
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

@@ -9,7 +9,8 @@ public class Student extends User {
     private final ArrayList<String> subjectsCompleted;
     private ArrayList<PS_Station> preferences;
 
-    public Student(String id, String name, String branch, double cgpa, ArrayList<String> subjectsCompleted) {
+    public Student(String id, String name, String branch, double cgpa, ArrayList<String> subjectsCompleted, String emailId, String password) {
+        super(emailId, password);
         this.id = id;
         this.name = name;
         this.branch = branch;
