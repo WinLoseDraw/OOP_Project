@@ -1,28 +1,85 @@
 import java.util.*;
 
-public class Admin extends User implements Sort {
+public class Admin extends User implements AdminActions {
     private ArrayList<PS_Station> PS_StationsList;
-    private ArrayList<Student> studentList;
+    private PriorityQueue<Student> studentList;
+    private int iterationNumber = 1;
 
     public Admin(String emailId, String password) {
         super(emailId, password);
-        PS_StationsList = new ArrayList<PS_Station>();
-        studentList = new ArrayList<Student>();
+        PS_StationsList = new ArrayList<>();
+        studentList = new PriorityQueue<>((o1, o2) -> (int) (o2.getCgpa() - o1.getCgpa()));
     }
 
-    public void updatePSStationDetails(PS_Station station) {
+    public void addStudentToStudentsList(Student student) {
+        studentList.offer(student);
+    }
 
+    public void updatePSStationDetails(PS_Station updatedStation) {
+        for (int i = 0; i < PS_StationsList.size(); i++) {
+            if (updatedStation.getName().equals(PS_StationsList.get(i).getName())) {
+                PS_StationsList.set(i, updatedStation);
+            }
+        }
     }
 
     public void addPS_Station(PS_Station station) { // TODO: Input from file handling
         PS_StationsList.add(station);
     }
 
-    public void performAllotment() {
+    public void showPSStationsList() {
+        for (PS_Station station : PS_StationsList) {
+            station.showDetailsOfStation();
+        }
     }
 
-    @Override
-    public void sortByCgpa() {
-        studentList.sort((o1, o2) -> (int) (o1.getCgpa() - o2.getCgpa()));
+    public void performIteration() {
+
+        System.out.println("Iteration " + iterationNumber + " taking place...");
+
+        iterationNumber++;
+
+        PriorityQueue<Student> tempStudentList = new PriorityQueue<>((o1, o2) -> (int) (o2.getCgpa() - o1.getCgpa()));
+
+        for (Student student : studentList) {
+            tempStudentList.offer(student);
+        }
+
+        while (!tempStudentList.isEmpty()) {
+
+            Student highestCgStudent = tempStudentList.poll();
+            ArrayList<PS_Station> highestCgStudentPreferences = highestCgStudent.getPreferences();
+            int counter = 0;
+
+            while (!highestCgStudent.getAllotted() && counter < highestCgStudentPreferences.size()) {
+                PS_Station highestCgStudentTopPreference = highestCgStudentPreferences.get(counter);
+                if (highestCgStudentTopPreference.getCapacity() > 0) {
+                    if (highestCgStudent.getSubjectsCompleted().containsAll(highestCgStudentTopPreference.getCompulsorySubjects())) {
+                        if (highestCgStudentTopPreference.getBranchPreference().contains(highestCgStudent.getBranch())) {
+                            studentList.remove(highestCgStudent);
+                            highestCgStudent.setAllotted(true);
+                            highestCgStudent.setCurrentAllotment(highestCgStudentTopPreference);
+                            studentList.offer(highestCgStudent);
+                            for (PS_Station station : PS_StationsList) {
+                                if (station.getName().equals(highestCgStudentTopPreference.getName())) {
+                                    station.decrementCapacity();
+                                }
+                            }
+//                        highestCgStudentTopPreference.setCapacity();
+//                        highestCgStudentPreferences.set(counter, highestCgStudentTopPreference);
+                        } else {
+                            counter++;
+                        }
+                    }
+                }
+            }
+
+            if (!highestCgStudent.getAllotted()) {
+                System.out.println("No PS Station available");
+            }
+        }
+
+        System.out.println("Iteration " + (iterationNumber-1) + " completed.");
+        System.out.println();
     }
 }

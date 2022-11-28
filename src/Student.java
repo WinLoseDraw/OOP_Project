@@ -1,21 +1,39 @@
 import java.util.*;
 
-public class Student extends User {
+public class Student extends User implements StudentActions {
 
     private final String id;
     private final String name;
     private final String branch;
     private final double cgpa;
-    private final ArrayList<String> subjectsCompleted;
+    private boolean isAllotted = false;
+    private PS_Station currentAllotment = null;
+    private final HashSet<String> subjectsCompleted;
     private ArrayList<PS_Station> preferences;
 
-    public Student(String id, String name, String branch, double cgpa, ArrayList<String> subjectsCompleted, String emailId, String password) {
+    public Student(String id, String name, String branch, double cgpa, HashSet<String> subjectsCompleted, String emailId, String password) {
         super(emailId, password);
         this.id = id;
         this.name = name;
         this.branch = branch;
         this.cgpa = cgpa;
         this.subjectsCompleted = subjectsCompleted;
+    }
+
+    public PS_Station getCurrentAllotment() {
+        return currentAllotment;
+    }
+
+    public void setCurrentAllotment(PS_Station currentAllotment) {
+        this.currentAllotment = currentAllotment;
+    }
+
+    public boolean getAllotted() {
+        return isAllotted;
+    }
+
+    public void setAllotted(boolean allotted) {
+        isAllotted = allotted;
     }
 
     public String getId() {
@@ -38,12 +56,8 @@ public class Student extends User {
         return this.preferences;
     }
 
-    public ArrayList<String> getSubjectsCompleted() {
+    public HashSet<String> getSubjectsCompleted() {
         return this.subjectsCompleted;
-    }
-
-    public ArrayList<PS_Station> getPSStationsDetails() { // TODO: COMPLETE
-        return null;
     }
 
     public void submitPreferences(ArrayList<PS_Station> preferences) { // TODO: COMPLETE
@@ -51,11 +65,23 @@ public class Student extends User {
     }
 
     public void acceptAllotment() {
+        this.isAllotted = true;
     }
 
-    public void rejectAllotment() {
+    public PS_Station rejectAllotment(PS_Station station) {
+        this.preferences.remove(0);
+        station.incrementCapacity();
+        this.isAllotted = false;
+        this.currentAllotment = null;
+        return station;
     }
 
     public void viewDetailsOfCurrentAllotment() {
+        try {
+            this.currentAllotment.showDetailsOfStation();
+        } catch (Exception e) {
+            System.out.println("No PS allotted currently");
+            System.out.println();
+        }
     }
 }

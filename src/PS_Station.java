@@ -6,22 +6,47 @@ public class PS_Station {
     private String location;
     private String projectDescription;
     private ArrayList<Student> studentsRegistered;
+    private ArrayList<String> compulsorySubjects;
     private ArrayList<String> branchPreference;
 
-    public PS_Station(String name, int capacity, String location, String projectDescription, ArrayList<String> branchPreference) {
+    public PS_Station(String name, int capacity, String location, String projectDescription, ArrayList<String> branchPreference, ArrayList<String> compulsorySubjects) {
         this.name = name;
         this.capacity = capacity;
         this.location = location;
         this.projectDescription = projectDescription;
         this.branchPreference = branchPreference;
-        studentsRegistered = new ArrayList<Student>();
+        this.compulsorySubjects = compulsorySubjects;
+        studentsRegistered = new ArrayList<>();
     }
 
-    public boolean isAllowed(Student student) {
-        return branchPreference.contains(student.getBranch());
+    public void showDetailsOfStation() {
+        System.out.println("Name: " + name);
+        System.out.println("Location: " + location);
+        System.out.println("Project Description: " + projectDescription);
+        System.out.println("Branch preference: " + branchPreference);
+        System.out.println("Compulsory Subjects: " + compulsorySubjects);
+        System.out.println();
     }
 
-    public void setCapacity() {
+    public String getName() {
+        return name;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public ArrayList<String> getBranchPreference() {
+        return branchPreference;
+    }
+
+    public ArrayList<String> getCompulsorySubjects() {
+        return compulsorySubjects;
+    }
+
+    public void incrementCapacity() { capacity++; }
+
+    public void decrementCapacity() {
         capacity--;
     }
 }
