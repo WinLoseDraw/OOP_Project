@@ -40,7 +40,7 @@ public class Admin extends User implements AdminActions, Runnable {
     }
 
     public void updatePSStationDetails(PS_Station updatedStation) {
-       synchronised(update){
+       synchronized(update){
         for (int i = 0; i < PS_StationsList.size(); i++) {
             if (updatedStation.getName().equals(PS_StationsList.get(i).getName())) {
                 PS_StationsList.set(i, updatedStation);
@@ -59,7 +59,7 @@ public class Admin extends User implements AdminActions, Runnable {
         }
     }
 
-    public synchronised void performIteration() {
+    public synchronized void performIteration() {
 
         System.out.println("Iteration " + iterationNumber + " taking place...");
 
