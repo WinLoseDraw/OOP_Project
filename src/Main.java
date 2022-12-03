@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class Main extends Thread {
 
     public static String login(String email, String pass, ArrayList<User> users) { // TODO: Exception handling
         for (User value : users) {
