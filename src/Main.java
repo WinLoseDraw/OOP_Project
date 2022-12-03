@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class Main {
 
@@ -51,6 +52,28 @@ public class Main {
 //        System.out.println(login("f202343420@pilani.bits-pilani.ac.in", "nishant", users));
 
         PS_Station JioStation = new PS_Station("Jio", 2, "Mumbai", "None", new ArrayList<>(Arrays.asList("CS", "EEE")), new ArrayList<>(List.of("OOP")));
+        Scanner sc=new Scanner(new FileInputStream("PS_STATION.txt"));
+        while(sc.hasNextLine())
+        {
+            String name=sc.next();
+            int capacity=sc.nextInt();
+            String location=sc.next();
+            String projectD=sc.next();
+            ArrayList<String> branchP=new ArrayList<>();
+            while(sc.hasNext())
+            {
+                branchP.add(sc.next());
+            }
+            ArrayList<String> compS=new ArrayList<>();
+            while(sc.hasNext())
+            {
+                compS.add(sc.next());
+            }
+            PS_Station p=new PS_Station(name,capacity,location,projectD,branchP,compS);
+            admin.addPS_Station(p);
+
+        }
+        sc.close();
 
         admin.addPS_Station(JioStation);
 
@@ -81,5 +104,8 @@ public class Main {
                 ((Student) user).viewDetailsOfCurrentAllotment();
             }
         }
+        Scanner br=new Scanner(new FileInputStream("preferences.txt"));
+
+
     }
 }
