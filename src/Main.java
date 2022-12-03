@@ -21,6 +21,7 @@ public class Main {
             System.out.println("Student could not be registered");
         }
     }
+
     public static void main(String[] args) throws Exception {
 
         ArrayList<User> users = new ArrayList<>();
@@ -52,24 +53,21 @@ public class Main {
 //        System.out.println(login("f202343420@pilani.bits-pilani.ac.in", "nishant", users));
 
         PS_Station JioStation = new PS_Station("Jio", 2, "Mumbai", "None", new ArrayList<>(Arrays.asList("CS", "EEE")), new ArrayList<>(List.of("OOP")));
-        Scanner sc=new Scanner(new FileInputStream("PS_STATION.txt"));
-        while(sc.hasNextLine())
-        {
-            String name=sc.next();
-            int capacity=sc.nextInt();
-            String location=sc.next();
-            String projectD=sc.next();
-            ArrayList<String> branchP=new ArrayList<>();
-            while(sc.hasNext())
-            {
+        Scanner sc = new Scanner(new FileInputStream("PS_STATION.txt"));
+        while (sc.hasNextLine()) {
+            String name = sc.next();
+            int capacity = sc.nextInt();
+            String location = sc.next();
+            String projectD = sc.next();
+            ArrayList<String> branchP = new ArrayList<>();
+            while (sc.hasNext()) {
                 branchP.add(sc.next());
             }
-            ArrayList<String> compS=new ArrayList<>();
-            while(sc.hasNext())
-            {
+            ArrayList<String> compS = new ArrayList<>();
+            while (sc.hasNext()) {
                 compS.add(sc.next());
             }
-            PS_Station p=new PS_Station(name,capacity,location,projectD,branchP,compS);
+            PS_Station p = new PS_Station(name, capacity, location, projectD, branchP, compS);
             admin.addPS_Station(p);
 
         }
@@ -104,8 +102,26 @@ public class Main {
                 ((Student) user).viewDetailsOfCurrentAllotment();
             }
         }
-        Scanner br=new Scanner(new FileInputStream("preferences.txt"));
+        Scanner br = new Scanner(new FileInputStream("preferences.txt"));
+        while (br.hasNextLine()) {
+            String name = br.next();
+            int capacity = br.nextInt();
+            String location = br.next();
+            String projectD = br.next();
+            ArrayList<String> branchP = new ArrayList<>();
+            while (br.hasNext()) {
+                branchP.add(br.next());
+            }
+            ArrayList<String> compS = new ArrayList<>();
+            while (br.hasNext()) {
+                compS.add(br.next());
+            }
+            PS_Station p = new PS_Station(name, capacity, location, projectD, branchP, compS);
+            ArrayList<PS_Station> pref = new ArrayList<PS_Station>();
+            ((ArrayList<PS_Station>) pref).add(PS_Station p);
 
 
+        }
     }
 }
+
