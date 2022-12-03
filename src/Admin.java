@@ -1,9 +1,33 @@
 import java.util.*;
 
-public class Admin extends User implements AdminActions {
+public class Admin extends User implements AdminActions, Runnable {
     private ArrayList<PS_Station> PS_StationsList;
     private PriorityQueue<Student> studentList;
     private int iterationNumber = 1;
+    Thread adminThread;
+	private  boolean stopThread = false;
+	
+	
+	public void start() {
+		if(adminThread==null) {
+			this.adminThread = new Thread(this,"admin");
+			this.adminThread.start();
+		}
+        public void run() {
+		while(true) {
+			if(stopThread) {System.out.println("Ending admin"); break;}
+			//System.out.println("Admin running");
+			Scanner adminScanner = new Scanner(System.in);
+			int i = 0;
+			while(i<1) {
+				Main.adminMenu(adminScanner);
+			}
+			
+		}
+	}
+	public void setStopThread(boolean stopThread) {
+		this.stopThread = stopThread;
+	}
 
     public Admin(String emailId, String password) {
         super(emailId, password);
@@ -16,10 +40,12 @@ public class Admin extends User implements AdminActions {
     }
 
     public void updatePSStationDetails(PS_Station updatedStation) {
+       synchronised(update){
         for (int i = 0; i < PS_StationsList.size(); i++) {
             if (updatedStation.getName().equals(PS_StationsList.get(i).getName())) {
                 PS_StationsList.set(i, updatedStation);
             }
+           } 
         }
     }
 
@@ -33,7 +59,7 @@ public class Admin extends User implements AdminActions {
         }
     }
 
-    public void performIteration() {
+    public synchronised void performIteration() {
 
         System.out.println("Iteration " + iterationNumber + " taking place...");
 
