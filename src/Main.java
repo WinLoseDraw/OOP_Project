@@ -22,10 +22,85 @@ public class Main extends Thread {
         }
     }
 
+    public static void startApp(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter 1 for Admin Mode, Enter 2 for Student Mode, Enter 3 to Exit");
+        String s = in.nextLine().trim();
+        if (s.equals("1")) {
+            adminLogin();
+        } else if (s.equals("2")) {
+            System.out.println("Enter 1 to Login, Enter 2 to Register");
+            String ch = in.nextLine().trim();
+            if (ch.equals("1")) {
+                studentLogin();
+            } else if (ch.equals("2")) {
+                studentRegister();
+            }
+        } else if (s.equals("3")) {
+        } else {
+            System.out.println("Invalid Option. Program Terminating!!!");
+        }
+    }
+
+    public static void adminLogin() throws Exception {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter your UserID and Password ->");
+        System.out.print("UserID : ");
+        String user = in.nextLine().trim();
+        System.out.print("Password: ");
+        String pwd = in.nextLine().trim();
+        boolean can = Admin.Verify(email, pwd);//TODO: Need to write method to verify predeclared admin email and pwd
+        if (can) {
+            Admin admin = new Admin(user, pwd);
+        } else {
+            System.out.println("Invalid Credentials!");
+            adminLogin();
+        }
+    }
+
+    public static void studentLogin() throws Exception {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter your UserID and Password ->");
+        System.out.print("UserID : ");
+        String user1 = in.nextLine().trim();
+        System.out.print("Password: ");
+        String pwd = in.nextLine().trim();
+        boolean can = User.Verify(user1, pwd);//TODO: Need to write method to verify already registered student from file.
+        if (can) {
+            User user = new User(user1, pwd);
+        } else {
+            System.out.println("Invalid Credentials!");
+            userLogin();
+        }
+    }
+
+    public static void studentRegister() throws Exception {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter your Details below : ");
+        System.out.print("Email-ID : ");
+        String email = in.nextLine().trim();
+        System.out.print("Password: ");
+        String pswd = in.nextLine().trim();
+        System.out.print("Name: ");
+        String name = in.nextLine().trim();
+        System.out.print("BITS-ID: ");
+        String id = in.nextLine().trim();
+        System.out.print("Branch: ");
+        String branch= in.nextLine().trim();
+        System.out.print("CGPA: ");
+        Double cg= Double.parseDouble(in.nextLine().trim());
+        System.out.print("Subjects Completed: ");
+        //TODO: take subjects completed input
+        System.out.println("Registered Successfully!");
+        Student user = new Student(id, name, branch, cg, email, pswd);
+    }
+}
+
+
     public static void main(String[] args) throws Exception {
 
         ArrayList<User> users = new ArrayList<>();
-
+        startApp();
 //        String email = ""; // temporary, get from user or file
 //        String pass = ""; // temporary, get from user or file
 //
