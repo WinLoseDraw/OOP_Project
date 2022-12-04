@@ -41,17 +41,13 @@ public class Admin extends User implements AdminActions, Runnable {
         System.out.println("Press 4 to Show PS Station.");
         System.out.println("Press 5 to Perform Iteration.");
         String s = in.nextLine().trim();
-        if (s.equals("1")) {
-            addStudentToStudentsList();
-        } else if (s.equals("2")) {
-            updatePSStationDetails();
-        } else if (s.equals("3")) {
-            addPS_Station();
-        } else if (s.equals("4")) {
-            showPSStationsList();
-        } else if (s.equals("5")) {
-            performIteration();
-    }
+        switch (s) {
+            case "1" -> addStudentToStudentsList();
+            case "2" -> updatePSStationDetails();
+            case "3" -> addPS_Station();
+            case "4" -> showPSStationsList();
+            case "5" -> performIteration();
+        }
     }
 
      public Admin(String emailId, String password) {
@@ -138,7 +134,7 @@ public class Admin extends User implements AdminActions, Runnable {
         boolean t = false;
         Scanner sc = new Scanner(new FileInputStream("AdminLoginDetails.txt"));
         while (sc.hasNextLine()) {
-            if ((sc.nextLine() == user1) && (sc.nextLine() == pswd)) {
+            if ((Objects.equals(sc.nextLine(), user1)) && (Objects.equals(sc.nextLine(), pswd))) {
                 t = true;
                 break;
             }
