@@ -35,15 +35,12 @@ public class Admin extends User implements AdminActions, Runnable {
     public void forward() throws Exception {
         System.out.println("Admin Mode");
         Scanner in = new Scanner(System.in);
-        System.out.println("Press 1 to Add Students.");
-        System.out.println("Press 2 to Update PS Station Details.");
-        System.out.println("Press 3 to Add PS Station .");
-        System.out.println("Press 4 to Show PS Station.");
-        System.out.println("Press 5 to Perform Iteration.");
+        System.out.println("Press 1 to Update PS Station Details.");
+        System.out.println("Press 2 to Add PS Station .");
+        System.out.println("Press 3 to Show PS Station.");
+        System.out.println("Press 4 to Perform Iteration.");
         String s = in.nextLine().trim();
-        if (s.equals("1")) {
-            addStudentToStudentsList();
-        } else if (s.equals("2")) {
+          if (s.equals("2")) {
             updatePSStationDetails();
         } else if (s.equals("3")) {
             addPS_Station();
