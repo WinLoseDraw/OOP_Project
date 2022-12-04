@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Student extends User implements StudentActions {
+public class Student extends User implements StudentActions, Runnable {
 
     private final String id;
     private final String name;
@@ -10,6 +10,7 @@ public class Student extends User implements StudentActions {
     private PS_Station currentAllotment = null;
     private final HashSet<String> subjectsCompleted;
     private ArrayList<PS_Station> preferences;
+    boolean running = true;
 
     public Student(String id, String name, String branch, double cgpa, HashSet<String> subjectsCompleted, String emailId, String password) {
         super(emailId, password);
@@ -18,17 +19,18 @@ public class Student extends User implements StudentActions {
         this.branch = branch;
         this.cgpa = cgpa;
         this.subjectsCompleted = subjectsCompleted;
+        //this.running =true;
     }
 
-    public PS_Station getCurrentAllotment() {
+    public synchronized PS_Station getCurrentAllotment() {
         return currentAllotment;
     }
 
-    public void setCurrentAllotment(PS_Station currentAllotment) {
+    public synchronized void setCurrentAllotment(PS_Station currentAllotment) {
         this.currentAllotment = currentAllotment;
     }
 
-    public boolean getAllotted() {
+    public synchronized boolean getAllotted() {
         return isAllotted;
     }
 
@@ -64,11 +66,11 @@ public class Student extends User implements StudentActions {
         this.preferences = preferences;
     }
 
-    public void acceptAllotment() {
+    public synchronized void acceptAllotment() {
         this.isAllotted = true;
     }
 
-    public PS_Station rejectAllotment(PS_Station station) {
+    public synchronized PS_Station rejectAllotment(PS_Station station) {
         this.preferences.remove(0);
         station.incrementCapacity();
         this.isAllotted = false;
