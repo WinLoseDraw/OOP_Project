@@ -23,7 +23,7 @@ public class Main extends Thread {
         }
     }
 
-    public static void startApp() throws exception{
+    public static void startApp() throws Exception{
         Scanner in = new Scanner(System.in);
         System.out.println("Enter 1 for Admin Mode, Enter 2 for Student Mode, Enter 3 to Exit");
         String s = in.nextLine().trim();
@@ -52,7 +52,7 @@ public class Main extends Thread {
         String pwd = in.nextLine().trim();
         boolean can = Admin.VerifyAdminLogin(user, pwd);//TODO: Need to write method to verify predeclared admin email and pwd
         if (can) {
-            Admin admin = new Admin(user, pwd);
+            Admin admin = new Admin(user,pwd);
             Thread thread = new Thread(admin);
             thread.start();
             Thread.currentThread().interrupt();
@@ -78,7 +78,7 @@ public class Main extends Thread {
             Thread.currentThread().interrupt();
         } else {
             System.out.println("Invalid Credentials!");
-            userLogin();
+            studentLogin();
         }
     }
 
