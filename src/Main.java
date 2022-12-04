@@ -23,7 +23,7 @@ public class Main extends Thread {
         }
     }
 
-    public static void startApp(){
+    public static void startApp() throws exception{
         Scanner in = new Scanner(System.in);
         System.out.println("Enter 1 for Admin Mode, Enter 2 for Student Mode, Enter 3 to Exit");
         String s = in.nextLine().trim();
@@ -53,6 +53,10 @@ public class Main extends Thread {
         boolean can = Admin.Verify(email, pwd);//TODO: Need to write method to verify predeclared admin email and pwd
         if (can) {
             Admin admin = new Admin(user, pwd);
+            Thread thread = new Thread(admin);
+            thread.start();
+            Thread.currentThread().interrupt();
+           
         } else {
             System.out.println("Invalid Credentials!");
             adminLogin();
@@ -69,6 +73,9 @@ public class Main extends Thread {
         boolean can = User.Verify(user1, pwd);//TODO: Need to write method to verify already registered student from file.
         if (can) {
             User user = new User(user1, pwd);
+            Thread thread = new Thread(user);
+            thread.start();
+            Thread.currentThread().interrupt();
         } else {
             System.out.println("Invalid Credentials!");
             userLogin();
@@ -93,6 +100,10 @@ public class Main extends Thread {
         System.out.print("Subjects Completed: ");
         //TODO: take subjects completed input
         System.out.println("Registered Successfully!");
+        User user = new User(user1, pwd);
+        Thread thread = new Thread(user);
+        thread.start();
+        Thread.currentThread().interrupt();
 
         Student user = new Student(id, name, branch, cg, email, pswd);
         //Admin object.addStudenttoStudentList(user)
