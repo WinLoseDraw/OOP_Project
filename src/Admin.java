@@ -22,7 +22,7 @@ public class Admin extends User implements AdminActions, Runnable {
                     if (stopThread) {System.out.println("Ending admin"); break;}               
                
                     System.out.println("Welcome Admin");
-                    Scanner adminScanner = new Scanner(System.in);      
+      
 
                 
             }
