@@ -50,7 +50,7 @@ public class Main extends Thread {
         String user = in.nextLine().trim();
         System.out.print("Password: ");
         String pwd = in.nextLine().trim();
-        boolean can = Admin.Verify(email, pwd);//TODO: Need to write method to verify predeclared admin email and pwd
+        boolean can = Admin.VerifyAdminLogin(user, pwd);//TODO: Need to write method to verify predeclared admin email and pwd
         if (can) {
             Admin admin = new Admin(user, pwd);
         } else {
