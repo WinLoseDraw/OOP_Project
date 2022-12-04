@@ -105,8 +105,8 @@ public class Main extends Thread {
         HashSet<String> subjectsCompleted = new HashSet<>(Arrays.asList(subjects));
         System.out.println("Registered Successfully!");
         Student user = new Student(id, name, branch, cg,subjectsCompleted, email, pswd);
-        Admin object=new Admin()
-        Admin object.addStudenttoStudentList(user)
+
+       // admin.addStudenttoStudentList(user)
         Thread thread = new Thread(user);
         thread.start();
         Thread.currentThread().interrupt();
