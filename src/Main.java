@@ -159,7 +159,7 @@ public class Main extends Thread {
 //        System.out.println(login("f202343420@pilani.bits-pilani.ac.in", "nishant", users));
 
         PS_Station JioStation = new PS_Station("Jio", 2, "Mumbai", "None", new ArrayList<>(Arrays.asList("CS", "EEE")), new ArrayList<>(List.of("OOP")));
-        Scanner sc = new Scanner(new FileInputStream("PS_STATION.txt"));
+       /* Scanner sc = new Scanner(new FileInputStream("PS_STATION.txt"));
         while (sc.hasNextLine()) {
             String name = sc.next();
             int capacity = sc.nextInt();
@@ -178,7 +178,7 @@ public class Main extends Thread {
 
         }
         sc.close();
-
+        */
         admin.addPS_Station(JioStation);
 
         // admin.showPSStationsList();
@@ -208,7 +208,7 @@ public class Main extends Thread {
                 ((Student) user).viewDetailsOfCurrentAllotment();
             }
         }
-        Scanner br = new Scanner(new FileInputStream("preferences.txt"));
+      /*  Scanner br = new Scanner(new FileInputStream("preferences.txt"));
         ArrayList<PS_Station> pref = new ArrayList<>();
         while (br.hasNextLine()) {
             String name = br.next();
@@ -226,7 +226,7 @@ public class Main extends Thread {
             PS_Station p = new PS_Station(name, capacity, location, projectD, branchP, compS);
 
             ((ArrayList<PS_Station>) pref).add(p);
-        }
+        }*/
 
     }
 }
