@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 
+
 public class Main extends Thread {
 
     public static String login(String email, String pass, ArrayList<User> users) { // TODO: Exception handling
@@ -92,7 +93,21 @@ public class Main extends Thread {
         System.out.print("Subjects Completed: ");
         //TODO: take subjects completed input
         System.out.println("Registered Successfully!");
+
         Student user = new Student(id, name, branch, cg, email, pswd);
+        PrintWriter ab=new PrintWriter(new FileOutputStream("StudentLoginDetails.txt"));
+        ab.println(email);
+        ab.println(pswd);
+        ab.close();
+        PrintWriter cd=new PrintWriter(new FileOutputStream("StudentDetails.txt"));
+        cd.println(email);
+        cd.println(pswd);
+        cd.println(name);
+        cd.println(id);
+        cd.println(branch);
+        cd.println(cg);
+        cd.println(subC);
+
     }
 }
 
