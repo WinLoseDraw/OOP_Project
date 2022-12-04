@@ -103,12 +103,12 @@ public class Main extends Thread {
         String[] subjects=sub.split(",");
         HashSet<String> subjectsCompleted = new HashSet<>(Arrays.asList(subjects));
         System.out.println("Registered Successfully!");
-        User user = new User(email, pswd);
+        Student user = new Student(id, name, branch, cg,subjectsCompleted, email, pswd);
         Thread thread = new Thread(user);
         thread.start();
         Thread.currentThread().interrupt();
 
-        Student user = new Student(id, name, branch, cg,subjectsCompleted, email, pswd);
+
         //Admin object.addStudenttoStudentList(user)
         PrintWriter ab=new PrintWriter(new FileOutputStream("StudentLoginDetails.txt"));
         ab.println(email);
