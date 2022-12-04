@@ -66,7 +66,7 @@ public class Main extends Thread {
         String user1 = in.nextLine().trim();
         System.out.print("Password: ");
         String pwd = in.nextLine().trim();
-        boolean can = User.Verify(user1, pwd);//TODO: Need to write method to verify already registered student from file.
+        boolean can = Student.VerifyStudentLogin(user1, pwd);//TODO: Need to write method to verify already registered student from file.
         if (can) {
             User user = new User(user1, pwd);
         } else {

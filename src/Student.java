@@ -88,7 +88,7 @@ public class Student extends User implements StudentActions, Runnable {
             System.out.println();
         }
     }
-    public boolean VerifyStudentLogin(String user1,String pswd) throws FileNotFoundException {
+    public static boolean VerifyStudentLogin(String user1,String pswd) throws FileNotFoundException {
         boolean b=false;
         Scanner sc=new Scanner(new FileInputStream("StudentLoginDetails.txt"));
         while(sc.hasNextLine()){
