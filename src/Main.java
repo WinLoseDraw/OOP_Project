@@ -142,18 +142,18 @@ public class Main extends Thread {
 //
 //        login(email, pass, users); // To login
 
-        Admin admin = new Admin("admin@admin.com", "admin");
-
-        Student student1 = new Student("2021A7PS0555P", "Meet Vithalani", "CS", 7.24, new HashSet<>(Arrays.asList("OOP", "DSA")), "f20210555@pilani.bits-pilani.ac.in", "meet");
-
-        Student student2 = new Student("2021A7PS2420P", "Nishant Luthra", "EEE", 9.73, new HashSet<>(Arrays.asList("OOP", "DBMS")), "f20212420@pilani.bits-pilani.ac.in", "nishant");
-
-        Student student3 = new Student("2021A7PS2223P", "Yash Sejpal", "BPharm", 6.76, new HashSet<>(Arrays.asList("OOP", "DSA")), "f20212223@pilani.bits-pilani.ac.in", "nishant");
-
-        users.add(admin);
-        users.add(student1);
-        users.add(student2);
-        users.add(student3);
+//        Admin admin = new Admin("admin@admin.com", "admin");
+//
+//        Student student1 = new Student("2021A7PS0555P", "Meet Vithalani", "CS", 7.24, new HashSet<>(Arrays.asList("OOP", "DSA")), "f20210555@pilani.bits-pilani.ac.in", "meet");
+//
+//        Student student2 = new Student("2021A7PS2420P", "Nishant Luthra", "EEE", 9.73, new HashSet<>(Arrays.asList("OOP", "DBMS")), "f20212420@pilani.bits-pilani.ac.in", "nishant");
+//
+//        Student student3 = new Student("2021A7PS2223P", "Yash Sejpal", "BPharm", 6.76, new HashSet<>(Arrays.asList("OOP", "DSA")), "f20212223@pilani.bits-pilani.ac.in", "nishant");
+//
+//        users.add(admin);
+//        users.add(student1);
+//        users.add(student2);
+//        users.add(student3);
 
 //        System.out.println(login("f20212420@pilani.bits-pilani.ac.in", "nishant", users));
 //
@@ -161,7 +161,7 @@ public class Main extends Thread {
 //
 //        System.out.println(login("f202343420@pilani.bits-pilani.ac.in", "nishant", users));
 
-        PS_Station JioStation = new PS_Station("Jio", 2, "Mumbai", "None", new ArrayList<>(Arrays.asList("CS", "EEE")), new ArrayList<>(List.of("OOP")));
+        // PS_Station JioStation = new PS_Station("Jio", 2, "Mumbai", "None", new ArrayList<>(Arrays.asList("CS", "EEE")), new ArrayList<>(List.of("OOP")));
 
 
 
@@ -178,23 +178,23 @@ public class Main extends Thread {
        // admin.addStudentToStudentsList(student2);
        // admin.addStudentToStudentsList(student3);
 
-        admin.performIteration();
+        // admin.performIteration();
 
-        for (User user : users) {
-            if (user instanceof Student) {
-                ((Student) user).viewDetailsOfCurrentAllotment();
-            }
-        }
+//        for (User user : users) {
+//            if (user instanceof Student) {
+//                ((Student) user).viewDetailsOfCurrentAllotment();
+//            }
+//        }
 
       //  admin.updatePSStationDetails(student1.rejectAllotment(student1.getCurrentAllotment()));
 
-        admin.performIteration();
+        // admin.performIteration();
 
-        for (User user : users) {
-            if (user instanceof Student) {
-                ((Student) user).viewDetailsOfCurrentAllotment();
-            }
-        }
+//        for (User user : users) {
+//            if (user instanceof Student) {
+//                ((Student) user).viewDetailsOfCurrentAllotment();
+//            }
+//        }
       /*  Scanner br = new Scanner(new FileInputStream("preferences.txt"));
         ArrayList<PS_Station> pref = new ArrayList<>();
         while (br.hasNextLine()) {

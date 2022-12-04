@@ -1,5 +1,8 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Admin extends User implements AdminActions, Runnable {
@@ -84,8 +87,43 @@ public class Admin extends User implements AdminActions, Runnable {
             makePSList();
         }
 
-        public void addStudentToStudentsList (){
+        public void addStudentToStudentsList () throws FileNotFoundException {
+            Scanner in = new Scanner(System.in);
+            System.out.println("Enter Student Details below : ");
+            System.out.print("Email-ID : ");
+            String email = in.nextLine().trim();
+            System.out.print("Password: ");
+            String pswd = in.nextLine().trim();
+            System.out.print("Name: ");
+            String name = in.nextLine().trim();
+            System.out.print("BITS-ID: ");
+            String id = in.nextLine().trim();
+            System.out.print("Branch: ");
+            String branch= in.nextLine().trim();
+            System.out.print("CGPA: ");
+            double cg= Double.parseDouble(in.nextLine().trim());
+            System.out.print("Subjects Completed: ");
+            //TODO: take subjects completed input
+            String sub=in.nextLine().trim();
+            String[] subjects=sub.split(",");
+            HashSet<String> subjectsCompleted = new HashSet<>(Arrays.asList(subjects));
+            System.out.println("Student added Successfully!");
+            Student user = new Student(id, name, branch, cg,subjectsCompleted, email, pswd);
+            studentList.offer(user);
 
+            PrintWriter ab=new PrintWriter(new FileOutputStream("StudentLoginDetails.txt",true));
+            ab.println(email);
+            ab.println(pswd);
+            ab.close();
+            PrintWriter cd=new PrintWriter(new FileOutputStream("StudentDetails.txt",true));
+            cd.println(email);
+            cd.println(pswd);
+            cd.println(name);
+            cd.println(id);
+            cd.println(branch);
+            cd.println(cg);
+            cd.println(sub);
+            cd.close();
         }
 
         public synchronized void updatePSStationDetails (){
@@ -93,8 +131,35 @@ public class Admin extends User implements AdminActions, Runnable {
 
         }
 
-        public void addPS_Station (){ // TODO: Input from file handling
+        public void addPS_Station () throws FileNotFoundException { // TODO: Input from file handling
+            Scanner in = new Scanner(System.in);
+            System.out.println("Enter PS Station Details below : ");
+            System.out.print("Name: ");
+            String name = in.nextLine().trim();
+            System.out.print("Capacity: ");
+            int cap = Integer.parseInt(in.nextLine().trim());
+            System.out.print("Location: ");
+            String loc = in.nextLine().trim();
+            System.out.print("Project Description: ");
+            String desc = in.nextLine().trim();
+            System.out.print("Branch Preference: ");
+            String branch= in.nextLine().trim();
+            ArrayList<String> branchP = new ArrayList<>(Arrays.asList(branch.split(",")));
+            System.out.print("Compulsory Subjects: ");
+            String comps= in.nextLine().trim();
+            ArrayList<String> compS = new ArrayList<>(Arrays.asList(comps.split(",")));
+            System.out.println("PS Station Added Successfully!");
+            PS_Station station = new PS_Station(name, cap, loc, desc, branchP, compS);
+            PS_StationsList.add(station);
 
+            PrintWriter ab=new PrintWriter(new FileOutputStream("PS_STATION.txt",true));
+            ab.println(name);
+            ab.println(cap);
+            ab.println(loc);
+            ab.println(desc);
+            ab.println(branch);
+            ab.println(comps);
+            ab.close();
         }
 
         public void showPSStationsList () {

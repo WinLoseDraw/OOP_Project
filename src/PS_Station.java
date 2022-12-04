@@ -5,9 +5,8 @@ public class PS_Station {
     private int capacity;
     private String location;
     private String projectDescription;
-    private ArrayList<Student> studentsRegistered;
-    private ArrayList<String> compulsorySubjects;
     private ArrayList<String> branchPreference;
+    private ArrayList<String> compulsorySubjects;
 
     public PS_Station(String name, int capacity, String location, String projectDescription, ArrayList<String> branchPreference, ArrayList<String> compulsorySubjects) {
         this.name = name;
@@ -16,7 +15,6 @@ public class PS_Station {
         this.projectDescription = projectDescription;
         this.branchPreference = branchPreference;
         this.compulsorySubjects = compulsorySubjects;
-        studentsRegistered = new ArrayList<>();
     }
 
     public void showDetailsOfStation() {
