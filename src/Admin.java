@@ -16,6 +16,7 @@ public class Admin extends User implements AdminActions, Runnable {
             this.adminThread = new Thread(this, "admin");
             this.adminThread.start();
         }
+    }
         public void run() {
                 while (true) {
                     if (stopThread) {System.out.println("Ending admin"); break;}               
