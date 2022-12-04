@@ -20,9 +20,9 @@ public class Admin extends User implements AdminActions, Runnable {
                 while (true) {
                     if (stopThread) {System.out.println("Ending admin"); break;}               
                
-                System.out.println("Welcome Admin");
-                Scanner adminScanner = new Scanner(System.in);      
-                Main.adminMenu(adminScanner);
+                    System.out.println("Welcome Admin");
+                    Scanner adminScanner = new Scanner(System.in);      
+                             Main.adminMenu(adminScanner);
                 
             }
         }
