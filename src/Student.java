@@ -114,29 +114,20 @@ public class Student extends User implements StudentActions, Runnable {
         Scanner sc=new Scanner(System.in);
         String file=sc.next();
         sc.close();
-        Scanner a=new Scanner(new FileInputStream(file));
+        Scanner in=new Scanner(new FileInputStream(file));
         ArrayList<PS_Station> pref=new ArrayList<>();
-        while (a.hasNextLine())
+        while (in.hasNextLine())
         {
-            String name=a.nextLine().trim();
-            int capacity=Integer.parseInt(a.nextLine().trim());
-            String location=a.nextLine().trim();
-            String projectD=a.nextLine().trim();
-            ArrayList<String> branchP=new ArrayList<>();
-            while(a.hasNext())
-            {
-                branchP.add(a.next());
-            }
-            ArrayList<String> compS=new ArrayList<>();
-            while(a.hasNext())
-            {
-                compS.add(a.next());
-            }
-            PS_Station p=new PS_Station(name,capacity,location,projectD,branchP,compS);
-            ArrayList<PS_Station> prefL=new ArrayList<>();
-            prefL.add(p);
-
-
+            String name = in.nextLine().trim();
+            int cap = Integer.parseInt(in.nextLine().trim());
+            String loc = in.nextLine().trim();
+            String desc = in.nextLine().trim();
+            String branch= in.nextLine().trim();
+            ArrayList<String> branchP = new ArrayList<>(Arrays.asList(branch.split(",")));
+            String comps= in.nextLine().trim();
+            ArrayList<String> compS = new ArrayList<>(Arrays.asList(comps.split(",")));
+            PS_Station station = new PS_Station(name, cap, loc, desc, branchP, compS);
+            preferences.add(station);
         }
 
     }

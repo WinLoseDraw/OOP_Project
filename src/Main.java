@@ -73,10 +73,14 @@ public class Main extends Thread {
         String pwd = in.nextLine().trim();
         boolean can = Student.VerifyStudentLogin(user1, pwd);//TODO: Need to write method to verify already registered student from file.
         if (can) {
-            User user = new User(user1, pwd);
-            Thread thread = new Thread((Runnable) user);
-            thread.start();
-            Thread.currentThread().interrupt();
+            Admin admin = new Admin("admin", "admin");
+            for (Student stu : admin.getStudentList()) {
+                if (stu.getEmailId().equals(user1) && stu.getPassword().equals(pwd)) {
+                    Thread thread = new Thread(stu);
+                    thread.start();
+                    Thread.currentThread().interrupt();
+                }
+            }
         } else {
             System.out.println("Invalid Credentials!");
             studentLogin();

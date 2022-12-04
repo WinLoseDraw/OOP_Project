@@ -13,6 +13,10 @@ public class Admin extends User implements AdminActions, Runnable {
     Thread adminThread;
     private boolean stopThread = false;
 
+    public PriorityQueue<Student> getStudentList() {
+        return studentList;
+    }
+
     public void makePSList() throws FileNotFoundException {
         Scanner sc = new Scanner(new FileInputStream("src/PS_STATION.txt"));
         while (sc.hasNextLine()) {
@@ -186,6 +190,11 @@ public class Admin extends User implements AdminActions, Runnable {
                 ArrayList<PS_Station> highestCgStudentPreferences = highestCgStudent.getPreferences();
                 int counter = 0;
 
+                if (highestCgStudentPreferences == null) {
+                    System.out.println(highestCgStudent.getName() + " has not updated their preferences.");
+                    continue;
+                }
+
                 while (!highestCgStudent.getAllotted() && counter < highestCgStudentPreferences.size()) {
                     PS_Station highestCgStudentTopPreference = highestCgStudentPreferences.get(counter);
                     if (highestCgStudentTopPreference.getCapacity() > 0) {
@@ -210,7 +219,7 @@ public class Admin extends User implements AdminActions, Runnable {
                 }
 
                 if (!highestCgStudent.getAllotted()) {
-                    System.out.println("No PS Station available");
+                    System.out.println("No PS Station available for " + highestCgStudent.getName());
                 }
             }
 
