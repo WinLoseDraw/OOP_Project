@@ -21,15 +21,37 @@ public class Admin extends User implements AdminActions, Runnable {
                 while (true) {
                     if (stopThread) {System.out.println("Ending admin"); break;}               
                
-                    System.out.println("Welcome Admin");
-      
-
-                
+                  try {
+                        forward();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                  }
             }
         }
         public void setStopThread ( boolean stopThread){
             this.stopThread = stopThread;
         }
+    
+    public void forward() throws Exception {
+        System.out.println("Admin Mode");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Press 1 to Add Students.");
+        System.out.println("Press 2 to Update PS Station Details.");
+        System.out.println("Press 3 to Add PS Station .");
+        System.out.println("Press 4 to Show PS Station.");
+        System.out.println("Press 5 to Perform Iteration.");
+        String s = in.nextLine().trim();
+        if (s.equals("1")) {
+            addStudentToStudentsList();
+        } else if (s.equals("2")) {
+            updatePSStationDetails();
+        } else if (s.equals("3")) {
+            addPS_Station();
+        } else if (s.equals("4")) {
+            showPSStationsList();
+        } else if (s.equals("5")) {
+            performIteration();
+    }
 
      public Admin(String emailId, String password) {
             super(emailId, password);
