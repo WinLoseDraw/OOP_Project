@@ -15,7 +15,7 @@ public class Main extends Thread {
         return "Invalid email or password";
     }
 
-    public static void registerStudent(String id, String name, String branch, double cgpa, HashSet<String> subjectsCompleted, String emailId, String password, ArrayList<User> users) {
+    public synchronized static void registerStudent(String id, String name, String branch, double cgpa, HashSet<String> subjectsCompleted, String emailId, String password, ArrayList<User> users) {
         try {
             users.add(new Student(id, name, branch, cgpa, subjectsCompleted, emailId, password));
         } catch (Exception e) {
