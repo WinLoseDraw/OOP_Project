@@ -42,11 +42,11 @@ public class Admin extends User implements AdminActions, Runnable {
         System.out.println("Press 5 to Perform Iteration.");
         String s = in.nextLine().trim();
         if (s.equals("1")) {
-            addStudentToStudentsList();
+          //  addStudentToStudentsList();
         } else if (s.equals("2")) {
-            updatePSStationDetails();
+            //updatePSStationDetails();
         } else if (s.equals("3")) {
-            addPS_Station();
+            //addPS_Station();
         } else if (s.equals("4")) {
             showPSStationsList();
         } else if (s.equals("5")) {
@@ -136,9 +136,9 @@ public class Admin extends User implements AdminActions, Runnable {
 
     public static boolean VerifyAdminLogin (String user1, String pswd) throws FileNotFoundException {
         boolean t = false;
-        Scanner sc = new Scanner(new FileInputStream("AdminLoginDetails.txt"));
+        Scanner sc = new Scanner(new FileInputStream("C:\\Users\\91976\\IdeaProjects\\OOP_Project\\src\\AdminLoginDetails.txt"));
         while (sc.hasNextLine()) {
-            if ((sc.nextLine() == user1) && (sc.nextLine() == pswd)) {
+            if ((sc.next().equals(user1) && (sc.next().equals(pswd)))) {
                 t = true;
                 break;
             }

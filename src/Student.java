@@ -65,7 +65,7 @@ public class Student extends User implements StudentActions, Runnable {
         } else if (s.equals("3")) {
              acceptAllotment();
         } else if (s.equals("4")) {
-            rejectAllotment();
+           // rejectAllotment();
         }
     }
 
@@ -109,8 +109,36 @@ public class Student extends User implements StudentActions, Runnable {
         return this.subjectsCompleted;
     }
 
-    public void submitPreferences(ArrayList<PS_Station> preferences) { // TODO: COMPLETE
-        this.preferences = preferences;
+    public void submitPreferences() throws FileNotFoundException { // TODO: COMPLETE
+        System.out.println("Enter the name of file");
+        Scanner sc=new Scanner(System.in);
+        String file=sc.next();
+        sc.close();
+        Scanner a=new Scanner(new FileInputStream(file));
+        ArrayList<PS_Station> pref=new ArrayList<>();
+        while (a.hasNextLine())
+        {
+            String name=a.nextLine().trim();
+            int capacity=Integer.parseInt(a.nextLine().trim());
+            String location=a.nextLine().trim();
+            String projectD=a.nextLine().trim();
+            ArrayList<String> branchP=new ArrayList<>();
+            while(a.hasNext())
+            {
+                branchP.add(a.next());
+            }
+            ArrayList<String> compS=new ArrayList<>();
+            while(a.hasNext())
+            {
+                compS.add(a.next());
+            }
+            PS_Station p=new PS_Station(name,capacity,location,projectD,branchP,compS);
+            ArrayList<PS_Station> prefL=new ArrayList<>();
+            prefL.add(p);
+
+
+        }
+
     }
 
     public synchronized void acceptAllotment() {

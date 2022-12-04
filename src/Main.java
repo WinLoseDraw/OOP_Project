@@ -105,12 +105,14 @@ public class Main extends Thread {
         HashSet<String> subjectsCompleted = new HashSet<>(Arrays.asList(subjects));
         System.out.println("Registered Successfully!");
         Student user = new Student(id, name, branch, cg,subjectsCompleted, email, pswd);
+        Admin object=new Admin()
+        Admin object.addStudenttoStudentList(user)
         Thread thread = new Thread(user);
         thread.start();
         Thread.currentThread().interrupt();
 
 
-        //Admin object.addStudenttoStudentList(user)
+
         PrintWriter ab=new PrintWriter(new FileOutputStream("StudentLoginDetails.txt"));
         ab.println(email);
         ab.println(pswd);
@@ -183,9 +185,9 @@ public class Main extends Thread {
 
         // admin.showPSStationsList();
 
-        student1.submitPreferences(new ArrayList<>(List.of(JioStation)));
-        student2.submitPreferences(new ArrayList<>(List.of(JioStation)));
-        student3.submitPreferences(new ArrayList<>(List.of(JioStation)));
+       // student1.submitPreferences(new ArrayList<>(List.of(JioStation)));
+        //student2.submitPreferences(new ArrayList<>(List.of(JioStation)));
+        //student3.submitPreferences(new ArrayList<>(List.of(JioStation)));
 
         admin.addStudentToStudentsList(student1);
         admin.addStudentToStudentsList(student2);
