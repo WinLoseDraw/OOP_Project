@@ -74,7 +74,7 @@ public class Main extends Thread {
         boolean can = Student.VerifyStudentLogin(user1, pwd);//TODO: Need to write method to verify already registered student from file.
         if (can) {
             User user = new User(user1, pwd);
-            Thread thread = new Thread(user);
+            Thread thread = new Thread((Runnable) user);
             thread.start();
             Thread.currentThread().interrupt();
         } else {
@@ -209,7 +209,7 @@ public class Main extends Thread {
             }
         }
         Scanner br = new Scanner(new FileInputStream("preferences.txt"));
-        ArrayList<PS_Station> pref = new ArrayList<PS_Station>();
+        ArrayList<PS_Station> pref = new ArrayList<>();
         while (br.hasNextLine()) {
             String name = br.next();
             int capacity = br.nextInt();
@@ -225,10 +225,9 @@ public class Main extends Thread {
             }
             PS_Station p = new PS_Station(name, capacity, location, projectD, branchP, compS);
 
-            pref.add(PS_Station p);
-
-
+            ((ArrayList<PS_Station>) pref).add(p);
         }
+
     }
 }
 
