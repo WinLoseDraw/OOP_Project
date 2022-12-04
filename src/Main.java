@@ -23,7 +23,7 @@ public class Main extends Thread {
         }
     }
 
-    public static void startApp() throws Exception{
+    public static void startApp() throws exception{
         Scanner in = new Scanner(System.in);
         System.out.println("Enter 1 for Admin Mode, Enter 2 for Student Mode, Enter 3 to Exit");
         String s = in.nextLine().trim();
@@ -99,13 +99,16 @@ public class Main extends Thread {
         Double cg= Double.parseDouble(in.nextLine().trim());
         System.out.print("Subjects Completed: ");
         //TODO: take subjects completed input
+        String sub=in.nextLine().trim();
+        String[] subjects=sub.split(",");
+        HashSet<String> subjectsCompleted = new HashSet<>(Arrays.asList(subjects));
         System.out.println("Registered Successfully!");
-        User user = new User(email, pswd);
+        User user = new User(user1, pwd);
         Thread thread = new Thread(user);
         thread.start();
         Thread.currentThread().interrupt();
 
-        Student user = new Student(id, name, branch, cg, email, pswd);
+        Student user = new Student(id, name, branch, cg,subjectsCompleted, email, pswd);
         //Admin object.addStudenttoStudentList(user)
         PrintWriter ab=new PrintWriter(new FileOutputStream("StudentLoginDetails.txt"));
         ab.println(email);

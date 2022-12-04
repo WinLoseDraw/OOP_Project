@@ -16,6 +16,8 @@ public class Student extends User implements StudentActions, Runnable {
 	Thread studThread;
     private boolean stopThread = false;
 
+    private static String userio = "RegStudents.txt";
+
     public Student(String id, String name, String branch, double cgpa, HashSet<String> subjectsCompleted, String emailId, String password) {
         super(emailId, password);
         this.id = id;
