@@ -1,3 +1,5 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Student extends User implements StudentActions, Runnable {
@@ -86,4 +88,18 @@ public class Student extends User implements StudentActions, Runnable {
             System.out.println();
         }
     }
+    public boolean VerifyStudentLogin(String user1,String pswd) throws FileNotFoundException {
+        boolean b=false;
+        Scanner sc=new Scanner(new FileInputStream("StudentLoginDetails.txt"));
+        while(sc.hasNextLine()){
+            if((sc.nextLine()==user1)&&(sc.nextLine()==pswd))
+            {
+                b=true;
+                break;
+            }
+
+        }
+        return b;
+    }
+
 }

@@ -95,6 +95,7 @@ public class Main extends Thread {
         System.out.println("Registered Successfully!");
 
         Student user = new Student(id, name, branch, cg, email, pswd);
+        //Admin object.addStudenttoStudentList(user)
         PrintWriter ab=new PrintWriter(new FileOutputStream("StudentLoginDetails.txt"));
         ab.println(email);
         ab.println(pswd);
@@ -107,7 +108,7 @@ public class Main extends Thread {
         cd.println(branch);
         cd.println(cg);
         cd.println(subC);
-
+        cd.close();
     }
 }
 
