@@ -10,6 +10,28 @@ public class Admin extends User implements AdminActions, Runnable {
     Thread adminThread;
     private boolean stopThread = false;
 
+    public void makePSList() throws FileNotFoundException {
+        Scanner sc = new Scanner(new FileInputStream("src/PS_STATION.txt"));
+        while (sc.hasNextLine()) {
+            String name = sc.nextLine();
+            int capacity = Integer.parseInt(sc.nextLine().trim());
+            String location = sc.nextLine();
+            String projectD = sc.nextLine();
+            String bp = sc.nextLine().trim();
+            String[] branchP = bp.split(",");
+            ArrayList<String> branchPreference = new ArrayList<>(Arrays.asList(branchP));
+            String sub = sc.nextLine().trim();
+            String[] subjects = sub.split(",");
+            ArrayList<String> subjectsCompleted = new ArrayList<>(Arrays.asList(subjects));
+
+
+            PS_Station p = new PS_Station(name, capacity, location, projectD, branchPreference, subjectsCompleted);
+            PS_StationsList.add(p);
+
+        }
+    }
+
+
 
     public void start() {
         if (adminThread == null) {
@@ -41,36 +63,38 @@ public class Admin extends User implements AdminActions, Runnable {
         System.out.println("Press 4 to Show PS Station.");
         System.out.println("Press 5 to Perform Iteration.");
         String s = in.nextLine().trim();
-        switch (s) {
-            case "1" -> addStudentToStudentsList();
-            case "2" -> updatePSStationDetails();
-            case "3" -> addPS_Station();
-            case "4" -> showPSStationsList();
-            case "5" -> performIteration();
-        }
+        if (s.equals("1")) {
+            addStudentToStudentsList();
+        } else if (s.equals("2")) {
+            updatePSStationDetails();
+        } else if (s.equals("3")) {
+            addPS_Station();
+        } else if (s.equals("4")) {
+            showPSStationsList();
+        } else if (s.equals("5")) {
+            performIteration();
+    }
     }
 
-     public Admin(String emailId, String password) {
+     public Admin(String emailId, String password) throws FileNotFoundException {
             super(emailId, password);
             PS_StationsList = new ArrayList<>();
             studentList = new PriorityQueue<>((o1, o2) -> (int) (o2.getCgpa() - o1.getCgpa()));
+            makePQ();
+            makePSList();
         }
 
-        public void addStudentToStudentsList (Student student){
-            studentList.offer(student);
+        public void addStudentToStudentsList (){
+
         }
 
-        public synchronized void updatePSStationDetails (PS_Station updatedStation){
+        public synchronized void updatePSStationDetails (){
         
-                for (int i = 0; i < PS_StationsList.size(); i++) {
-                    if (updatedStation.getName().equals(PS_StationsList.get(i).getName())) {
-                        PS_StationsList.set(i, updatedStation);
-                    }
-                }      
+
         }
 
-        public void addPS_Station (PS_Station station){ // TODO: Input from file handling
-            PS_StationsList.add(station);
+        public void addPS_Station (){ // TODO: Input from file handling
+
         }
 
         public void showPSStationsList () {
@@ -132,14 +156,31 @@ public class Admin extends User implements AdminActions, Runnable {
 
     public static boolean VerifyAdminLogin (String user1, String pswd) throws FileNotFoundException {
         boolean t = false;
-        Scanner sc = new Scanner(new FileInputStream("AdminLoginDetails.txt"));
+        Scanner sc = new Scanner(new FileInputStream("src/AdminLoginDetails.txt"));
         while (sc.hasNextLine()) {
-            if ((Objects.equals(sc.nextLine(), user1)) && (Objects.equals(sc.nextLine(), pswd))) {
+            if ((sc.next().equals(user1) && (sc.next().equals(pswd)))) {
                 t = true;
                 break;
             }
 
         }
         return t;
+    }
+    public void makePQ() throws FileNotFoundException {
+        Scanner p=new Scanner(new FileInputStream("StudentDetails.txt"));
+        while(p.hasNextLine()) {
+            String em = p.nextLine().trim();
+            String pswd = p.nextLine().trim();
+            String name = p.nextLine().trim();
+            String id = p.nextLine().trim();
+            String branch = p.nextLine().trim();
+            double cg = Double.parseDouble(p.nextLine().trim());
+            String sub = p.nextLine().trim();
+            String[] subjects = sub.split(",");
+            HashSet<String> subjectsCompleted = new HashSet<>(Arrays.asList(subjects));
+            Student user = new Student(id, name, branch, cg, subjectsCompleted, em, pswd);
+            studentList.offer(user);
+        }
+
     }
 }

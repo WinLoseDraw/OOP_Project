@@ -165,7 +165,7 @@ public class Student extends User implements StudentActions, Runnable {
         boolean b=false;
         Scanner sc=new Scanner(new FileInputStream("StudentLoginDetails.txt"));
         while(sc.hasNextLine()){
-            if((sc.nextLine()==user1)&&(sc.nextLine()==pswd))
+            if((sc.nextLine().equals(user1)&&(sc.nextLine().equals(pswd))))
             {
                 b=true;
                 break;

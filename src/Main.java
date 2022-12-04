@@ -39,6 +39,7 @@ public class Main extends Thread {
                 studentRegister();
             }
         } else if (s.equals("3")) {
+            System.exit(0);
         } else {
             System.out.println("Invalid Option. Program Terminating!!!");
         }
@@ -113,11 +114,11 @@ public class Main extends Thread {
 
 
 
-        PrintWriter ab=new PrintWriter(new FileOutputStream("StudentLoginDetails.txt"));
+        PrintWriter ab=new PrintWriter(new FileOutputStream("StudentLoginDetails.txt",true));
         ab.println(email);
         ab.println(pswd);
         ab.close();
-        PrintWriter cd=new PrintWriter(new FileOutputStream("StudentDetails.txt"));
+        PrintWriter cd=new PrintWriter(new FileOutputStream("StudentDetails.txt",true));
         cd.println(email);
         cd.println(pswd);
         cd.println(name);
@@ -161,27 +162,11 @@ public class Main extends Thread {
 //        System.out.println(login("f202343420@pilani.bits-pilani.ac.in", "nishant", users));
 
         PS_Station JioStation = new PS_Station("Jio", 2, "Mumbai", "None", new ArrayList<>(Arrays.asList("CS", "EEE")), new ArrayList<>(List.of("OOP")));
-       /* Scanner sc = new Scanner(new FileInputStream("PS_STATION.txt"));
-        while (sc.hasNextLine()) {
-            String name = sc.next();
-            int capacity = sc.nextInt();
-            String location = sc.next();
-            String projectD = sc.next();
-            ArrayList<String> branchP = new ArrayList<>();
-            while (sc.hasNext()) {
-                branchP.add(sc.next());
-            }
-            ArrayList<String> compS = new ArrayList<>();
-            while (sc.hasNext()) {
-                compS.add(sc.next());
-            }
-            PS_Station p = new PS_Station(name, capacity, location, projectD, branchP, compS);
-            admin.addPS_Station(p);
 
-        }
-        sc.close();
-        */
-        admin.addPS_Station(JioStation);
+
+
+
+       // admin.addPS_Station(JioStation);
 
         // admin.showPSStationsList();
 
@@ -189,9 +174,9 @@ public class Main extends Thread {
         //student2.submitPreferences(new ArrayList<>(List.of(JioStation)));
         //student3.submitPreferences(new ArrayList<>(List.of(JioStation)));
 
-        admin.addStudentToStudentsList(student1);
-        admin.addStudentToStudentsList(student2);
-        admin.addStudentToStudentsList(student3);
+       // admin.addStudentToStudentsList(student1);
+       // admin.addStudentToStudentsList(student2);
+       // admin.addStudentToStudentsList(student3);
 
         admin.performIteration();
 
@@ -201,7 +186,7 @@ public class Main extends Thread {
             }
         }
 
-        admin.updatePSStationDetails(student1.rejectAllotment(student1.getCurrentAllotment()));
+      //  admin.updatePSStationDetails(student1.rejectAllotment(student1.getCurrentAllotment()));
 
         admin.performIteration();
 
