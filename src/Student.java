@@ -36,19 +36,38 @@ public class Student extends User implements StudentActions, Runnable {
 	}
     //Overriding 
     public void run() {
-		while(true) {
-			if(stopThread) {System.out.println("Ending student"); break;}
-			
-			Scanner studentScanner = new Scanner(System.in);
-				System.out.println("Welcome " + this.name);
-
-		}
-	}
+		try {
+            forward();
+        } 
+	    catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+	
     
     public void setStopThread(boolean stopThread) {
 		this.stopThread = stopThread;
 	}
 	
+
+	public void forward() throws Exception {
+        System.out.println("User Mode");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Press 1 to Submit preferences.");
+        System.out.println("Press 2 to Get Current Allotment.");
+        System.out.println("Press 3 to Accept Allotment.");
+        System.out.println("Press 4 to Reject Allotment.");
+        String s = in.nextLine().trim();
+        if (s.equals("1")) {
+            submitPreferences();
+        } else if (s.equals("2")) {
+           viewDetailsOfCurrentAllotment();
+        } else if (s.equals("3")) {
+             acceptAllotment();
+        } else if (s.equals("4")) {
+            rejectAllotment();
+        }
+    }
 
     public synchronized PS_Station getCurrentAllotment() {
         return currentAllotment;
