@@ -13,6 +13,8 @@ public class Student extends User implements StudentActions, Runnable {
     private final HashSet<String> subjectsCompleted;
     private ArrayList<PS_Station> preferences;
     boolean running = true;
+	Thread studThread;
+    private boolean stopThread = false;
 
     public Student(String id, String name, String branch, double cgpa, HashSet<String> subjectsCompleted, String emailId, String password) {
         super(emailId, password);
@@ -23,6 +25,28 @@ public class Student extends User implements StudentActions, Runnable {
         this.subjectsCompleted = subjectsCompleted;
         //this.running =true;
     }
+    
+    public void start() {
+		if(studThread==null) {
+			this.studThread = new Thread(this,this.name);
+			this.studThread.start();
+		}
+	}
+    //Overriding 
+    public void run() {
+		while(true) {
+			if(stopThread) {System.out.println("Ending student"); break;}
+			
+			Scanner studentScanner = new Scanner(System.in);
+				System.out.println("Welcome " + this.name);
+				Main.studentMenu(studentScanner,this);	
+		}
+	}
+    
+    public void setStopThread(boolean stopThread) {
+		this.stopThread = stopThread;
+	}
+	
 
     public synchronized PS_Station getCurrentAllotment() {
         return currentAllotment;
