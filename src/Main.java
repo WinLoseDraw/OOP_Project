@@ -103,7 +103,7 @@ public class Main extends Thread {
         String[] subjects=sub.split(",");
         HashSet<String> subjectsCompleted = new HashSet<>(Arrays.asList(subjects));
         System.out.println("Registered Successfully!");
-        User user = new User(user1, pwd);
+        User user = new User(email, pswd);
         Thread thread = new Thread(user);
         thread.start();
         Thread.currentThread().interrupt();
@@ -121,7 +121,7 @@ public class Main extends Thread {
         cd.println(id);
         cd.println(branch);
         cd.println(cg);
-        cd.println(subC);
+        cd.println(sub);
         cd.close();
     }
 }
