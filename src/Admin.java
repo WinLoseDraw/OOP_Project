@@ -34,7 +34,7 @@ public class Admin extends User implements AdminActions, Runnable {
             this.stopThread = stopThread;
         }
 
-    public Admin(String emailId, String password) {
+     public Admin(String emailId, String password) {
             super(emailId, password);
             PS_StationsList = new ArrayList<>();
             studentList = new PriorityQueue<>((o1, o2) -> (int) (o2.getCgpa() - o1.getCgpa()));

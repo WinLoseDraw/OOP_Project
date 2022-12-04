@@ -23,7 +23,7 @@ public class Main extends Thread {
         }
     }
 
-    public static void startApp() throws exception{
+    public static void startApp() throws Exception{
         Scanner in = new Scanner(System.in);
         System.out.println("Enter 1 for Admin Mode, Enter 2 for Student Mode, Enter 3 to Exit");
         String s = in.nextLine().trim();
@@ -100,7 +100,7 @@ public class Main extends Thread {
         System.out.print("Subjects Completed: ");
         //TODO: take subjects completed input
         System.out.println("Registered Successfully!");
-        User user = new User(user1, pwd);
+        User user = new User(email, pswd);
         Thread thread = new Thread(user);
         thread.start();
         Thread.currentThread().interrupt();
