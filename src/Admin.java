@@ -52,6 +52,7 @@ public class Admin extends User implements AdminActions, Runnable {
         } else if (s.equals("5")) {
             performIteration();
     }
+    }
 
      public Admin(String emailId, String password) {
             super(emailId, password);
