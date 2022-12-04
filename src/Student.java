@@ -41,7 +41,7 @@ public class Student extends User implements StudentActions, Runnable {
 			
 			Scanner studentScanner = new Scanner(System.in);
 				System.out.println("Welcome " + this.name);
-				Main.studentMenu(studentScanner,this);	
+
 		}
 	}
     

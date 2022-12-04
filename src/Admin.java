@@ -23,7 +23,7 @@ public class Admin extends User implements AdminActions, Runnable {
                
                     System.out.println("Welcome Admin");
                     Scanner adminScanner = new Scanner(System.in);      
-                             Main.adminMenu(adminScanner);
+
                 
             }
         }
