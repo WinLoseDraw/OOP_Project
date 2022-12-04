@@ -62,7 +62,7 @@ public class Admin extends User implements AdminActions, Runnable {
         Scanner in = new Scanner(System.in);
         System.out.println("Press 1 to Add Students.");
         System.out.println("Press 2 to Update PS Station Details.");
-        System.out.println("Press 3 to Add PS Station .");
+        System.out.println("Press 3 to Add PS Station.");
         System.out.println("Press 4 to Show PS Station.");
         System.out.println("Press 5 to Perform Iteration.");
         String s = in.nextLine().trim();
@@ -152,7 +152,7 @@ public class Admin extends User implements AdminActions, Runnable {
             PS_Station station = new PS_Station(name, cap, loc, desc, branchP, compS);
             PS_StationsList.add(station);
 
-            PrintWriter ab=new PrintWriter(new FileOutputStream("PS_STATION.txt",true));
+            PrintWriter ab=new PrintWriter(new FileOutputStream("src/PS_STATION.txt",true));
             ab.println(name);
             ab.println(cap);
             ab.println(loc);

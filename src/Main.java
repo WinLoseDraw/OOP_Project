@@ -28,27 +28,26 @@ public class Main extends Thread {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter 1 for Admin Mode, Enter 2 for Student Mode, Enter 3 to Exit");
         String s = in.nextLine().trim();
-        if (s.equals("1")) {
-            adminLogin();
-        } else if (s.equals("2")) {
-            System.out.println("Enter 1 to Login, Enter 2 to Register");
-            String ch = in.nextLine().trim();
-            if (ch.equals("1")) {
-                studentLogin();
-            } else if (ch.equals("2")) {
-                studentRegister();
+        switch (s) {
+            case "1" -> adminLogin();
+            case "2" -> {
+                System.out.println("Enter 1 to Login, Enter 2 to Register");
+                String ch = in.nextLine().trim();
+                if (ch.equals("1")) {
+                    studentLogin();
+                } else if (ch.equals("2")) {
+                    studentRegister();
+                }
             }
-        } else if (s.equals("3")) {
-            System.exit(0);
-        } else {
-            System.out.println("Invalid Option. Program Terminating!!!");
+            case "3" -> System.exit(0);
+            default -> System.out.println("Invalid Option. Program Terminating!!!");
         }
     }
 
     public static void adminLogin() throws Exception {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter your UserID and Password ->");
-        System.out.print("UserID : ");
+        System.out.print("UserID: ");
         String user = in.nextLine().trim();
         System.out.print("Password: ");
         String pwd = in.nextLine().trim();

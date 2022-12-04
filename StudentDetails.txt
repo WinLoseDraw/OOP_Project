@@ -5,3 +5,17 @@ YASH
 CS
 8.0
 OOP
+asdad
+abcd
+nish
+1022102
+CS
+6.0
+OOP,DSA
+f20212420
+1234
+brownman
+20212420
+CS
+10.0
+OOP,DSA,DBMS

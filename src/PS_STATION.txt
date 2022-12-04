@@ -10,3 +10,9 @@ Pilani
 Good
 CS,ENI
 OOP
+Googil
+2
+Delhi
+No
+CS,ECE,EEE
+OOP,DSA
