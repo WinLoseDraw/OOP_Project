@@ -116,15 +116,15 @@ public class Admin extends User implements AdminActions, Runnable {
 
     }
     public static boolean VerifyAdminLogin (String user1, String pswd) throws FileNotFoundException {
-        boolean b = false;
+        boolean t = false;
         Scanner sc = new Scanner(new FileInputStream("AdminLoginDetails.txt"));
         while (sc.hasNextLine()) {
             if ((sc.nextLine() == user1) && (sc.nextLine() == pswd)) {
-                b = true;
+                t = true;
                 break;
             }
 
         }
-        return b;
+        return t;
     }
 }
