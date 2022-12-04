@@ -111,7 +111,7 @@ public class Admin extends User implements AdminActions, Runnable {
             System.out.println();
         }
 
-    }
+
     public static boolean VerifyAdminLogin (String user1, String pswd) throws FileNotFoundException {
         boolean t = false;
         Scanner sc = new Scanner(new FileInputStream("AdminLoginDetails.txt"));
