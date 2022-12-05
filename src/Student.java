@@ -1,5 +1,7 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class Student extends User implements StudentActions, Runnable {
@@ -26,8 +28,12 @@ public class Student extends User implements StudentActions, Runnable {
         this.cgpa = cgpa;
         this.subjectsCompleted = subjectsCompleted;
         //this.running =true;
+        this.preferences = new ArrayList<>();
     }
-    
+
+    public void addToPreferences(PS_Station station) {
+        this.preferences.add(station);
+    }
     public void start() {
 		if(studThread==null) {
 			this.studThread = new Thread(this,this.name);
@@ -115,7 +121,8 @@ public class Student extends User implements StudentActions, Runnable {
         String file=sc.next();
         sc.close();
         Scanner in=new Scanner(new FileInputStream(file));
-        ArrayList<PS_Station> pref=new ArrayList<>();
+        PrintWriter out = new PrintWriter(new FileOutputStream("src/StudentPreferences.txt", true));
+        out.println(this.getName());
         while (in.hasNextLine())
         {
             String name = in.nextLine().trim();
@@ -128,8 +135,10 @@ public class Student extends User implements StudentActions, Runnable {
             ArrayList<String> compS = new ArrayList<>(Arrays.asList(comps.split(",")));
             PS_Station station = new PS_Station(name, cap, loc, desc, branchP, compS);
             preferences.add(station);
+            out.println(name);
         }
-
+        out.println("-----");
+        out.close();
     }
 
     public synchronized void acceptAllotment() {
@@ -144,12 +153,19 @@ public class Student extends User implements StudentActions, Runnable {
         return station;
     }
 
-    public void viewDetailsOfCurrentAllotment() {
-        try {
-            this.currentAllotment.showDetailsOfStation();
-        } catch (Exception e) {
-            System.out.println("No PS allotted currently");
-            System.out.println();
+    public void viewDetailsOfCurrentAllotment() throws FileNotFoundException {
+        boolean flag = true;
+        Scanner sc = new Scanner(new FileInputStream("src/Allotments.txt"));
+        while (sc.hasNextLine() && flag) {
+            String name = sc.nextLine().trim();
+            String allotment = sc.nextLine().trim();
+            if (this.getName().equals(name)) {
+                System.out.println(name + " was allotted " + allotment);
+                flag = false;
+            }
+        }
+        if (flag) {
+            System.out.println("No PS Station allotted currently");
         }
     }
     public static boolean VerifyStudentLogin(String user1,String pswd) throws FileNotFoundException {

@@ -1,8 +1,4 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.lang.reflect.Array;
+import java.io.*;
 import java.util.*;
 
 public class Admin extends User implements AdminActions, Runnable {
@@ -89,6 +85,8 @@ public class Admin extends User implements AdminActions, Runnable {
             studentList = new PriorityQueue<>((o1, o2) -> (int) (o2.getCgpa() - o1.getCgpa()));
             makePQ();
             makePSList();
+            setPreferences();
+            setCurrentAllotments();
         }
 
         public void addStudentToStudentsList () throws FileNotFoundException {
@@ -172,7 +170,7 @@ public class Admin extends User implements AdminActions, Runnable {
             }
         }
 
-        public synchronized void performIteration () {
+        public synchronized void performIteration () throws FileNotFoundException {
 
             System.out.println("Iteration " + iterationNumber + " taking place...");
 
@@ -203,6 +201,11 @@ public class Admin extends User implements AdminActions, Runnable {
                                 studentList.remove(highestCgStudent);
                                 highestCgStudent.setAllotted(true);
                                 highestCgStudent.setCurrentAllotment(highestCgStudentTopPreference);
+                                System.out.println(highestCgStudent.getName() + " was allotted " + highestCgStudentTopPreference.getName());
+                                PrintWriter pr = new PrintWriter(new FileOutputStream("src/Allotments.txt", true));
+                                pr.println(highestCgStudent.getName());
+                                pr.println(highestCgStudentTopPreference.getName());
+                                pr.close();
                                 studentList.offer(highestCgStudent);
                                 for (PS_Station station : PS_StationsList) {
                                     if (station.getName().equals(highestCgStudentTopPreference.getName())) {
@@ -239,6 +242,57 @@ public class Admin extends User implements AdminActions, Runnable {
 
         }
         return t;
+    }
+
+    public void setCurrentAllotments() throws FileNotFoundException {
+        Scanner sc = new Scanner(new FileInputStream("src/Allotments.txt"));
+        while (sc.hasNextLine()) {
+            String name = sc.nextLine().trim();
+            String allotment = sc.nextLine().trim();
+
+            for (Student stu : studentList) {
+                if (stu.getName().equals(name)) {
+                    for (PS_Station st : PS_StationsList) {
+                        if (st.getName().equals(allotment)) {
+                            stu.setCurrentAllotment(st);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void setPreferences() throws FileNotFoundException {
+        Scanner sc = new Scanner(new FileInputStream("src/StudentPreferences.txt"));
+        boolean takeName = true;
+        String studName = null;
+        ArrayList<String> prefs = null;
+        while (sc.hasNextLine()) {
+            if (takeName) {
+                studName = sc.nextLine().trim();
+                prefs = new ArrayList<>();
+                takeName = false;
+            }
+
+            String line = sc.nextLine().trim();
+            if (!line.equals("-----") && !line.equals("")) {
+                prefs.add(line);
+            } else if (line.equals("-----")) {
+                takeName = true;
+                for (Student ele : studentList) {
+                    if (ele.getName().equals(studName)) {
+                        for (String name : prefs) {
+                            for (PS_Station st : PS_StationsList) {
+                                if (st.getName().equals(name)) {
+                                    ele.addToPreferences(st);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
     }
     public void makePQ() throws FileNotFoundException {
         Scanner p=new Scanner(new FileInputStream("StudentDetails.txt"));

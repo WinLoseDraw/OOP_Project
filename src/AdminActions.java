@@ -10,5 +10,5 @@ public interface AdminActions {
 
     void showPSStationsList();
 
-    void performIteration();
+    void performIteration() throws FileNotFoundException;
 }
