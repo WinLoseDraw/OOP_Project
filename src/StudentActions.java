@@ -1,6 +1,8 @@
+import java.io.FileNotFoundException;
+
 public interface StudentActions {
 
     void acceptAllotment();
 
-    PS_Station rejectAllotment(PS_Station station);
+    void rejectAllotment() throws FileNotFoundException;
 }

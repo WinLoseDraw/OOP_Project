@@ -64,14 +64,11 @@ public class Student extends User implements StudentActions, Runnable {
         System.out.println("Press 3 to Accept Allotment.");
         System.out.println("Press 4 to Reject Allotment.");
         String s = in.nextLine().trim();
-        if (s.equals("1")) {
-            submitPreferences();
-        } else if (s.equals("2")) {
-           viewDetailsOfCurrentAllotment();
-        } else if (s.equals("3")) {
-             acceptAllotment();
-        } else if (s.equals("4")) {
-           // rejectAllotment();
+        switch (s) {
+            case "1" -> submitPreferences();
+            case "2" -> viewDetailsOfCurrentAllotment();
+            case "3" -> acceptAllotment();
+            case "4" -> rejectAllotment();
         }
     }
 
@@ -143,14 +140,33 @@ public class Student extends User implements StudentActions, Runnable {
 
     public synchronized void acceptAllotment() {
         this.isAllotted = true;
+        System.out.println("Allotment accepted.");
     }
 
-    public synchronized PS_Station rejectAllotment(PS_Station station) {
+    public synchronized void rejectAllotment() throws FileNotFoundException {
         this.preferences.remove(0);
-        station.incrementCapacity();
+        // station.incrementCapacity();
         this.isAllotted = false;
+        PrintWriter pr = new PrintWriter(new FileOutputStream("temp.txt"));
+        Scanner sc = new Scanner(new FileInputStream("src/Allotments.txt"));
+        while (sc.hasNextLine()) {
+            pr.println(sc.nextLine().trim());
+        }
+        sc.close();
+        pr.close();
+        PrintWriter a = new PrintWriter(new FileOutputStream("src/Allotments.txt"));
+        Scanner c = new Scanner(new FileInputStream("temp.txt"));
+        while(c.hasNextLine()) {
+            String line = c.nextLine();
+            if (!line.equals(this.getName()) && !line.equals(this.currentAllotment.getName())) {
+                a.println(line);
+            }
+        }
+        a.close();
+        c.close();
+        System.out.println("Allotment rejected.");
         this.currentAllotment = null;
-        return station;
+        // return station;
     }
 
     public void viewDetailsOfCurrentAllotment() throws FileNotFoundException {
