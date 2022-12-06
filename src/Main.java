@@ -34,7 +34,7 @@ public class Main extends Thread {
         String user = in.nextLine().trim();
         System.out.print("Password: ");
         String pwd = in.nextLine().trim();
-        boolean can = Admin.VerifyAdminLogin(user, pwd);//TODO: Need to write method to verify predeclared admin email and pwd
+        boolean can = Admin.VerifyAdminLogin(user, pwd);
         if (can) {
             Admin admin = new Admin(user,pwd);
             Thread thread = new Thread(admin);
@@ -54,7 +54,7 @@ public class Main extends Thread {
         String user1 = in.nextLine().trim();
         System.out.print("Password: ");
         String pwd = in.nextLine().trim();
-        boolean can = Student.VerifyStudentLogin(user1, pwd);//TODO: Need to write method to verify already registered student from file.
+        boolean can = Student.VerifyStudentLogin(user1, pwd);
         if (can) {
             Admin admin = new Admin("admin", "admin");
             for (Student stu : admin.getStudentList()) {
@@ -86,7 +86,6 @@ public class Main extends Thread {
         System.out.print("CGPA: ");
         Double cg= Double.parseDouble(in.nextLine().trim());
         System.out.print("Subjects Completed: ");
-        //TODO: take subjects completed input
         String sub=in.nextLine().trim();
         String[] subjects=sub.split(",");
         HashSet<String> subjectsCompleted = new HashSet<>(Arrays.asList(subjects));

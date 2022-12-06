@@ -1,7 +1,7 @@
 SBI
 2
 Pilani
-Lauda
+Okay
 CS,Mech
 OOP,DSA
 JP MORGAN
