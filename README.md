@@ -1,5 +1,5 @@
 # OOP_Project
-Problem Statement : Practise School Allotment System
+Problem Statement : Practice School Allotment System
 
 Download the code and run it on your device. To enter the Admin mode, press 1. To eneter the Student mode, press 2. To exit, press 3.
 
