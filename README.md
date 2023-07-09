@@ -20,3 +20,10 @@ Allows updating details of a particular station like location.
 
 The video explaining the implementation by the group members has been put up here :
 https://drive.google.com/drive/folders/1-4HDT3aRUYtId41G3sTo2ij1nha0PP96?usp=sharing
+
+
+# Contributors: 
+  1. Nishant Luthra
+  2. Meet Vithalani
+  3. Yash Sejpal
+  4. Ishika Kadam
